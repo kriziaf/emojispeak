@@ -1,3 +1,1 @@
-A Pen created at CodePen.io. You can find this one at https://codepen.io/kriziaf/pen/yrqxqy.
-
- Testing out the functionality of Bootstrap-themed Tokenfield jQuery plugin.
+Accessibility project in collaboration with Krizia Fernando to help people with low vision use social media like twitter.
