@@ -1,0 +1,17 @@
+.container
+  %form{ class: "form-horizontal", role: "form" }
+    .form-group
+      .col-xs-9
+        %input{ id: "tag-input-33", type: 'text', class: 'form-control input-lg js-tag-input', placeholder: 'Type tags here' }
+      .col-xs-3
+        %submit.btn.btn-primary.btn-lg.btn-block{ type: 'submit' }
+          Send  
+.container
+  %form{ class: "form-horizontal", role: "form" }
+    .form-group.readonly
+      .col-xs-12
+        %input{ id: "tokenlist-1", type: 'text', class: 'form-control input-lg js-tag-input', readonly: true }
+    .form-group
+      .col-xs-12
+        %input{ value: 'input values, are, automatically, made as tags', id: "tokenlist-loaded", type: 'text', class: 'form-control input-lg js-tag-input' }
+    

@@ -1,0 +1,7 @@
+$("#tag-input-33").tokenfield();
+$("#tokenlist-loaded").tokenfield();
+
+$("submit").on('click', (e) ->
+  e.preventDefault();
+  $("#tokenlist-1").val( $("#tag-input-33").tokenfield('getTokensList') )
+)

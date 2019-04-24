@@ -1,0 +1,48 @@
+{
+  "_from": "emoji-datasource-twitter",
+  "_id": "emoji-datasource-twitter@4.1.0",
+  "_inBundle": false,
+  "_integrity": "sha1-43Sm7IfgcVYeR7B92wCzv0Mm0qI=",
+  "_location": "/emoji-datasource-twitter",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "emoji-datasource-twitter",
+    "name": "emoji-datasource-twitter",
+    "escapedName": "emoji-datasource-twitter",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/emoji-datasource-twitter/-/emoji-datasource-twitter-4.1.0.tgz",
+  "_shasum": "e374a6ec87e071561e47b07ddb00b3bf4326d2a2",
+  "_spec": "emoji-datasource-twitter",
+  "_where": "/Volumes/ext_hd/Dev/mod6/bootstrap_emojispeak",
+  "author": {
+    "name": "Cal Henderson",
+    "email": "cal@iamcal.com"
+  },
+  "bugs": {
+    "url": "https://github.com/iamcal/emoji-data/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "Emoji data and images - twitter",
+  "homepage": "https://github.com/iamcal/emoji-data",
+  "keywords": [
+    "emoji"
+  ],
+  "license": "MIT",
+  "main": "emoji.json",
+  "name": "emoji-datasource-twitter",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/iamcal/emoji-data.git"
+  },
+  "version": "4.1.0"
+}

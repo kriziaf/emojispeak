@@ -1,0 +1,14 @@
+(function() {
+  $("#tag-input-33").tokenfield();
+
+  $("#tokenlist-loaded").tokenfield();
+
+  $("submit").on('click', function(e) {
+    e.preventDefault();
+    return $("#tokenlist-1").val($("#tag-input-33").tokenfield('getTokensList'));
+  });
+
+}).call(this);
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiPGFub255bW91cz4iXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFBQSxDQUFBLENBQUUsZUFBRixDQUFrQixDQUFDLFVBQW5CLENBQUE7O0VBQ0EsQ0FBQSxDQUFFLG1CQUFGLENBQXNCLENBQUMsVUFBdkIsQ0FBQTs7RUFFQSxDQUFBLENBQUUsUUFBRixDQUFXLENBQUMsRUFBWixDQUFlLE9BQWYsRUFBd0IsUUFBQSxDQUFDLENBQUQsQ0FBQTtJQUN0QixDQUFDLENBQUMsY0FBRixDQUFBO1dBQ0EsQ0FBQSxDQUFFLGNBQUYsQ0FBaUIsQ0FBQyxHQUFsQixDQUF1QixDQUFBLENBQUUsZUFBRixDQUFrQixDQUFDLFVBQW5CLENBQThCLGVBQTlCLENBQXZCO0VBRnNCLENBQXhCO0FBSEEiLCJzb3VyY2VzQ29udGVudCI6WyIkKFwiI3RhZy1pbnB1dC0zM1wiKS50b2tlbmZpZWxkKCk7XG4kKFwiI3Rva2VubGlzdC1sb2FkZWRcIikudG9rZW5maWVsZCgpO1xuXG4kKFwic3VibWl0XCIpLm9uKCdjbGljaycsIChlKSAtPlxuICBlLnByZXZlbnREZWZhdWx0KCk7XG4gICQoXCIjdG9rZW5saXN0LTFcIikudmFsKCAkKFwiI3RhZy1pbnB1dC0zM1wiKS50b2tlbmZpZWxkKCdnZXRUb2tlbnNMaXN0JykgKVxuKSJdfQ==
+//# sourceURL=coffeescript
