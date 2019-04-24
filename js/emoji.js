@@ -28,4 +28,14 @@ function selectRandom() {
   randomEmojiDiv.lastElementChild.innerText = `${popularDefinition.alias}, ${
     popularDefinition.votes
   } votes`;
+
+  loadEmojiMeaning(randomEmoji);
+}
+
+function loadEmojiMeaning(randomEmoji) {
+  const emojiMeaningDiv = document.getElementById("emoji-meaning");
+
+  emojiMeaningDiv.firstElementChild.innerHTML = `${
+    randomEmoji.name
+  } <img src="./image/${randomEmoji.image}" alt="${randomEmoji.name}"/> <br/>`;
 }
