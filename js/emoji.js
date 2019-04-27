@@ -1,30 +1,34 @@
-const emojipediaStore = [];
+let emoji;
 
 document.addEventListener("DOMContentLoaded", async () => {
-  await fetch("http://localhost:3000/emojipedia")
+  await fetch("http://localhost:3000/api/v1/emoji")
     .then(res => res.json())
-    .then(emojipedia => emojipediaStore.push(...emojipedia));
+    .then(randEmoji => (emoji = randEmoji));
+  // .then(emojipedia => emojipediaStore.push(...emojipedia));
 
   selectRandom();
 
-  document.getElementById("create-store").addEventListener("click", () => {
-    fetch("http://localhost:3001/emojipediaStore").then(res => res.json()).then(emojipedia => createStore(emojipedia))
-  })
+  // document.getElementById("create-store").addEventListener("click", () => {
+  //   fetch("http://localhost:3001/emojipediaStore")
+  //     .then(res => res.json())
+  //     .then(emojipedia => createStore(emojipedia));
+  // });
 });
 
 function selectRandom() {
-  const randomEmoji =
-    emojipediaStore[Math.floor(Math.random() * emojipediaStore.length) + 1];
+  // const randomEmoji =
+  // emojipediaStore[Math.floor(Math.random() * emojipediaStore.length) + 1];
 
+  console.log(emoji);
   const randomEmojiDiv = document.getElementById("emoji-random");
 
-  randomEmojiDiv.firstElementChild.innerHTML =
-    randomEmoji.name +
-    " " +
-    `<img src="./image/${randomEmoji.image}" alt="${randomEmoji.name}"/>`;
+  // debugger;
+  randomEmojiDiv.firstElementChild.innerHTML = `${
+    emoji.name
+  } <img src="./image/${emoji.image}" alt="${emoji.name}"/>`;
 
-  let popularDefinition = randomEmoji.aliases[0];
-  for (let alias of randomEmoji.aliases) {
+  let popularDefinition = emoji.aliases[0];
+  for (let alias of emoji.aliases) {
     if (popularDefinition.votes < alias.votes) {
       popularDefinition = alias;
     }
@@ -33,7 +37,7 @@ function selectRandom() {
     popularDefinition.votes
   } votes`;
 
-  loadEmojiMeaning(randomEmoji);
+  loadEmojiMeaning(emoji);
 }
 
 function loadEmojiMeaning(randomEmoji) {
@@ -70,14 +74,13 @@ function loadEmojiMeaning(randomEmoji) {
     .join("");
 }
 
-
 // Needed once to create a JSON seed file
 // function createStore(emojipedia) {
 //   const emojipediaStore = [];
-  
+
 //   for(let obj of emojipedia) {
 //     let emoji = {};
-  
+
 //     for(let key in obj) {
 //       if(key === "name"){
 //         if(obj[key] === null) {
