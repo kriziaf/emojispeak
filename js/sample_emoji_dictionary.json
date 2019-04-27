@@ -1,8 +1,15 @@
 {
   "name": "",
+  "unified": "",
   "image": "",
   "aliases": [
     {
+      "id": 0,
+      "alias": "",
+      "votes": 0
+    },
+    {
+      "id": 1,
       "alias": "",
       "votes": 0
     }

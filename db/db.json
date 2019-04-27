@@ -6,6 +6,7 @@
       "image": "0023-fe0f-20e3.png",
       "aliases": [
         {
+          "id": 1,
           "alias": "hash",
           "votes": 0
         }

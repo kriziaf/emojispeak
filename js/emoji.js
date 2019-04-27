@@ -6,6 +6,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     .then(emojipedia => emojipediaStore.push(...emojipedia));
 
   selectRandom();
+
+  document.getElementById("create-store").addEventListener("click", () => {
+    fetch("http://localhost:3001/emojipediaStore").then(res => res.json()).then(emojipedia => createStore(emojipedia))
+  })
 });
 
 function selectRandom() {
@@ -65,3 +69,43 @@ function loadEmojiMeaning(randomEmoji) {
     )
     .join("");
 }
+
+
+// Needed once to create a JSON seed file
+// function createStore(emojipedia) {
+//   const emojipediaStore = [];
+  
+//   for(let obj of emojipedia) {
+//     let emoji = {};
+  
+//     for(let key in obj) {
+//       if(key === "name"){
+//         if(obj[key] === null) {
+//           emoji[key] = obj["short_name"].replace(/_/g, " ").split(" ").map(el => el.charAt(0).toUpperCase() + el.slice(1)).join(" ").toUpperCase()
+//         } else {
+//           emoji[key] = obj[key];
+//         }
+//       } else if(key === "image") {
+//         emoji[key] = obj[key];
+//       } else if(key === "short_names") {
+//         emoji["aliases"] = [];
+
+//         for(let sn of obj[key]) {
+//           let alias = {};
+//           alias["alias"] = sn;
+//           alias["votes"] = 0;
+//           emoji["aliases"].push(alias)
+//         }
+//       } else if(key === "unified") {
+//         emoji[key] = obj[key];
+//       }
+//     }
+//     emojipediaStore.push(emoji);
+//   }
+//   const opts = {
+//     method: "POST",
+//     headers: { "Content-Type": "application/json" },
+//     body: JSON.stringify(emojipediaStore)
+//   }
+//   fetch("http://localhost:3002/emojiStore", opts)
+// }
