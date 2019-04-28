@@ -88,20 +88,20 @@ function selectRandom() {
     popularDefinition.alias
   }, <span id="popular-meaning">${popularDefinition.votes}</span> votes`;
 
-  loadEmojiMeaning(emoji);
+  loadEmojiMeaning();
 }
 
-function loadEmojiMeaning(randomEmoji) {
+function loadEmojiMeaning() {
   const emojiMeaningDiv = document.getElementById("emoji-meaning");
   const aliasesDiv = document.getElementById("aliases");
 
   emojiMeaningDiv.firstElementChild.innerHTML = `${
-    randomEmoji.name
-  } <img src="./image/${randomEmoji.image}" alt="${randomEmoji.name}"/> <br/>`;
+    emoji.name
+  } <img src="./image/${emoji.image}" alt="${emoji.name}"/> <br/>`;
 
   aliasesDiv.innerHTML = "";
 
-  aliasesDiv.innerHTML = randomEmoji.aliases
+  aliasesDiv.innerHTML = emoji.aliases
     .sort((a, b) => a.votes - b.votes)
     .map(
       a => `<div class="col-xs-6">
@@ -125,6 +125,14 @@ function loadEmojiMeaning(randomEmoji) {
 <div class="col-xs-3">`
     )
     .join("");
+
+  const upvoteBtns = document.getElementsByClassName(
+    "btn btn-primary btn-lg btn-block upvote"
+  );
+
+  for (let btn of upvoteBtns) {
+    btn.addEventListener("click", e => upvoteHandler(e.target.dataset.id));
+  }
 }
 
 // Needed once to create a JSON seed file
