@@ -1,10 +1,11 @@
 let emoji;
+// const emojipediaStore = [];
 
 document.addEventListener("DOMContentLoaded", async () => {
   await fetch("http://localhost:3000/api/v1/emoji")
     .then(res => res.json())
     .then(randEmoji => (emoji = randEmoji));
-  // .then(emojipedia => emojipediaStore.push(...emojipedia));
+  // .then(emojipedia => emojipedia.push(...emojipedia));
 
   selectRandom();
 
@@ -86,6 +87,8 @@ function upvoteHandler(ids) {
     }`,
     opts
   );
+
+  // loadAlias();
 }
 
 function selectRandom() {
@@ -167,29 +170,37 @@ function loadAlias() {
 // function createStore(emojipedia) {
 //   const emojipediaStore = [];
 
-//   for(let obj of emojipedia) {
+//   for (let obj of emojipedia) {
 //     let emoji = {};
 
-//     for(let key in obj) {
-//       if(key === "name"){
-//         if(obj[key] === null) {
-//           emoji[key] = obj["short_name"].replace(/_/g, " ").split(" ").map(el => el.charAt(0).toUpperCase() + el.slice(1)).join(" ").toUpperCase()
+//     for (let key in obj) {
+//       if (key === "name") {
+//         if (obj[key] === null) {
+//           emoji[key] = obj["short_name"]
+//             .replace(/_/g, " ")
+//             .split(" ")
+//             .map(el => el.charAt(0).toUpperCase() + el.slice(1))
+//             .join(" ")
+//             .toUpperCase();
 //         } else {
 //           emoji[key] = obj[key];
 //         }
-//       } else if(key === "image") {
+//       } else if (key === "image") {
 //         emoji[key] = obj[key];
-//       } else if(key === "short_names") {
+//       } else if (key === "short_names") {
 //         emoji["aliases"] = [];
 
-//         for(let sn of obj[key]) {
+//         for (let sn of obj[key]) {
 //           let alias = {};
 //           alias["alias"] = sn;
 //           alias["votes"] = 0;
-//           emoji["aliases"].push(alias)
+//           emoji["aliases"].push(alias);
 //         }
-//       } else if(key === "unified") {
-//         emoji[key] = obj[key];
+//       } else if (key === "unified") {
+//         emoji[key] = obj[key]
+//           .split("-")
+//           .join("")
+//           .toLowerCase();
 //       }
 //     }
 //     emojipediaStore.push(emoji);
@@ -198,6 +209,6 @@ function loadAlias() {
 //     method: "POST",
 //     headers: { "Content-Type": "application/json" },
 //     body: JSON.stringify(emojipediaStore)
-//   }
-//   fetch("http://localhost:3002/emojiStore", opts)
+//   };
+//   fetch("http://localhost:3002/emojiStore", opts);
 // }
