@@ -13,13 +13,64 @@ document.addEventListener("DOMContentLoaded", async () => {
   //     .then(res => res.json())
   //     .then(emojipedia => createStore(emojipedia));
   // });
+
+  document.getElementById("random-btn").addEventListener("click", async () => {
+    await fetch("http://localhost:3000/api/v1/emoji")
+      .then(res => res.json())
+      .then(randEmoji => (emoji = randEmoji));
+
+    selectRandom();
+  });
+
+  const upvoteBtns = document.getElementsByClassName(
+    "btn btn-primary btn-lg btn-block upvote"
+  );
+
+  for (let btn of upvoteBtns) {
+    btn.addEventListener("click", e => upvoteHandler(e.target.dataset.id));
+  }
 });
+
+function upvoteHandler(ids) {
+  const emojiAliasVotes = ids.split("-");
+
+  const newVotes = parseInt(emojiAliasVotes[2]) + 1;
+
+  const upvoteBtns = document.getElementsByClassName(
+    "btn btn-primary btn-lg btn-block upvote"
+  );
+
+  for (let btn of upvoteBtns) {
+    if (btn.dataset.id === ids) {
+      btn.dataset.id = `${emoji.id}-${emojiAliasVotes[1]}-${newVotes}`;
+    }
+  }
+
+  const aliasVotes = document.getElementById(
+    `${emoji.id}-${emojiAliasVotes[1]}`
+  );
+  const popularMeaning = document.getElementById("popular-meaning");
+
+  popularMeaning.innerText = newVotes;
+  aliasVotes.innerText = `${newVotes} votes`;
+
+  const opts = {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ alias: emojiAliasVotes[1], votes: newVotes })
+  };
+
+  fetch(
+    `http://localhost:3000/api/v1/emoji/${emojiAliasVotes[0]}
+    }`,
+    opts
+  );
+}
 
 function selectRandom() {
   // const randomEmoji =
   // emojipediaStore[Math.floor(Math.random() * emojipediaStore.length) + 1];
 
-  console.log(emoji);
   const randomEmojiDiv = document.getElementById("emoji-random");
 
   // debugger;
@@ -33,9 +84,9 @@ function selectRandom() {
       popularDefinition = alias;
     }
   }
-  randomEmojiDiv.lastElementChild.innerText = `${popularDefinition.alias}, ${
-    popularDefinition.votes
-  } votes`;
+  randomEmojiDiv.lastElementChild.innerHTML = `${
+    popularDefinition.alias
+  }, <span id="popular-meaning">${popularDefinition.votes}</span> votes`;
 
   loadEmojiMeaning(emoji);
 }
@@ -62,10 +113,12 @@ function loadEmojiMeaning(randomEmoji) {
   />
 </div>
 <div class="col-xs-1">
-  <p>${a.votes} votes</p>
+  <p id="${emoji.id}-${a.id}">${a.votes} votes</p>
 </div>
 <div class="col-xs-2">
-  <submit class="btn btn-primary btn-lg btn-block" type="submit">
+  <submit data-id="${emoji.id}-${a.id}-${
+        a.votes
+      }" class="btn btn-primary btn-lg btn-block upvote" type="submit">
     Upvote
   </submit>
 </div>
