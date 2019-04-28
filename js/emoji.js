@@ -29,7 +29,28 @@ document.addEventListener("DOMContentLoaded", async () => {
   for (let btn of upvoteBtns) {
     btn.addEventListener("click", e => upvoteHandler(e.target.dataset.id));
   }
+
+  document
+    .getElementById("define-emoji")
+    .addEventListener("click", defineHandler);
 });
+
+function defineHandler() {
+  const definition = document.getElementById("tokenlist-loaded").value;
+  const newAlias = { alias: definition, votes: 0, emoji_id: emoji.id };
+  const opts = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(newAlias)
+  };
+
+  fetch("http://localhost:3000/api/v1/alias", opts)
+    .then(res => res.json())
+    .then(alias => {
+      emoji.aliases.push(alias);
+      loadAlias();
+    });
+}
 
 function upvoteHandler(ids) {
   const emojiAliasVotes = ids.split("-");
@@ -87,24 +108,31 @@ function selectRandom() {
   randomEmojiDiv.lastElementChild.innerHTML = `${
     popularDefinition.alias
   }, <span id="popular-meaning">${popularDefinition.votes}</span> votes`;
+  randomEmojiDiv.lastElementChild.style = "display:none";
 
   loadEmojiMeaning();
 }
 
 function loadEmojiMeaning() {
   const emojiMeaningDiv = document.getElementById("emoji-meaning");
-  const aliasesDiv = document.getElementById("aliases");
 
   emojiMeaningDiv.firstElementChild.innerHTML = `${
     emoji.name
   } <img src="./image/${emoji.image}" alt="${emoji.name}"/> <br/>`;
+
+  loadAlias();
+}
+
+function loadAlias() {
+  console.log(emoji.aliases);
+  const aliasesDiv = document.getElementById("aliases");
 
   aliasesDiv.innerHTML = "";
 
   aliasesDiv.innerHTML = emoji.aliases
     .sort((a, b) => a.votes - b.votes)
     .map(
-      a => `<div class="col-xs-6">
+      a => `<div><div class="col-xs-6">
   <input
     class="form-control input-lg js-tag-input"
     readonly
@@ -122,7 +150,7 @@ function loadEmojiMeaning() {
     Upvote
   </submit>
 </div>
-<div class="col-xs-3">`
+<div class="col-xs-3"></div>`
     )
     .join("");
 
