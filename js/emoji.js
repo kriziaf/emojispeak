@@ -55,7 +55,7 @@ function searchHandler() {
 }
 
 function defineHandler() {
-  const definition = document.getElementById("tokenlist-loaded").value;
+  const definition = document.getElementById("tokenlist-loaded1").value;
   const newAlias = { alias: definition, votes: 0, emoji_id: emoji.id };
   const opts = {
     method: "POST",
