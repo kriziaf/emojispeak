@@ -2,7 +2,7 @@ let emoji;
 // const emojipediaStore = [];
 
 document.addEventListener("DOMContentLoaded", async () => {
-  await fetch("http://localhost:3000/api/v1/emoji")
+  await fetch("http://emoji-endpoint.herokuapp.com/api/v1/emoji")
     .then(res => res.json())
     .then(randEmoji => (emoji = randEmoji));
   // .then(emojipedia => emojipedia.push(...emojipedia));
@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   document.getElementById("search").addEventListener("click", searchHandler);
 
   document.getElementById("random-btn").addEventListener("click", async () => {
-    await fetch("http://localhost:3000/api/v1/emoji")
+    await fetch("http://emoji-endpoint.herokuapp.com/api/v1/emoji")
       .then(res => res.json())
       .then(randEmoji => (emoji = randEmoji));
 
@@ -46,7 +46,7 @@ function searchHandler() {
     body: JSON.stringify({ search: q })
   };
 
-  fetch("http://localhost:3000/api/v1/searchbyname", opts)
+  fetch("http://emoji-endpoint.herokuapp.com/api/v1/searchbyname", opts)
     .then(res => res.json())
     .then(data => {
       emoji = data;
@@ -63,7 +63,7 @@ function defineHandler() {
     body: JSON.stringify(newAlias)
   };
 
-  fetch("http://localhost:3000/api/v1/alias", opts)
+  fetch("http://emoji-endpoint.herokuapp.com/api/v1/alias", opts)
     .then(res => res.json())
     .then(alias => {
       emoji.aliases.push(alias);
@@ -101,7 +101,7 @@ function upvoteHandler(ids) {
   };
 
   fetch(
-    `http://localhost:3000/api/v1/emoji/${emojiAliasVotes[0]}
+    `http://emoji-endpoint.herokuapp.com/api/v1/emoji/${emojiAliasVotes[0]}
     }`,
     opts
   );
