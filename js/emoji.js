@@ -15,6 +15,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   //     .then(emojipedia => createStore(emojipedia));
   // });
 
+  document.getElementById("search").addEventListener("click", searchHandler);
+
   document.getElementById("random-btn").addEventListener("click", async () => {
     await fetch("http://localhost:3000/api/v1/emoji")
       .then(res => res.json())
@@ -35,6 +37,22 @@ document.addEventListener("DOMContentLoaded", async () => {
     .getElementById("define-emoji")
     .addEventListener("click", defineHandler);
 });
+
+function searchHandler() {
+  const q = document.getElementById("q").value;
+  const opts = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ search: q })
+  };
+
+  fetch("http://localhost:3000/api/v1/searchbyname", opts)
+    .then(res => res.json())
+    .then(data => {
+      emoji = data;
+      selectRandom();
+    });
+}
 
 function defineHandler() {
   const definition = document.getElementById("tokenlist-loaded").value;
@@ -135,7 +153,7 @@ function loadAlias() {
   aliasesDiv.innerHTML = emoji.aliases
     .sort((a, b) => a.votes - b.votes)
     .map(
-      a => `<div><div class="col-xs-6">
+      a => `<div><div class="col-xs-8">
   <input
     class="form-control input-lg js-tag-input"
     readonly
@@ -152,8 +170,7 @@ function loadAlias() {
       }" class="btn btn-primary btn-lg btn-block upvote" type="submit">
     Upvote
   </submit>
-</div>
-<div class="col-xs-3"></div>`
+</div>`
     )
     .join("");
 
